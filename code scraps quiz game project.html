@@ -1,0 +1,156 @@
+code scraps quiz game project
+
+// Start with a score of zero.
+var score = 0
+
+// Loop over every question object
+for (var i = 0; i < questions.length; i++) {
+    // Display current question to user and ask OK/Cancel
+    var answer = confirm(questions[i].q);
+  
+        // Compare answers
+        if ((answer === true && questions[i].a === "t") ||
+          (answer === false && questions[i].a === "f")) {
+          // Increase score
+          score++;
+          alert("Correct!");
+        }
+        else {
+          alert("Wrong!");
+        }
+      }
+  
+      // Show total at end
+      alert("You got " + score + "/" + questions.length);
+
+
+
+
+
+            // Set the date we're counting down to
+var countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+    
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+    
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+  // Output the result in an element with id="demo"
+  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+    
+  // If the count down is over, write some text 
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  }
+}, 1000);
+
+//code from another student
+// function startquiz(){
+//   setTimeout();
+//   document.getElementById("startscreen");
+//   StartScreen.setAttribute("hidden", "true");
+//   Questiondiv.removeAttribute("class");
+//   getQuestions();
+// }
+
+//more code from the same other student
+// function getQuestions() {
+//   CurrentQuestion = questions[CurrentQuestionIndex];
+//   questiontitle.textContent = CurrentQuestion.title;
+//     for (var i = 0; i < CurrentQuestion.choice.length; i++) {
+//       var ChoiceBtn = document.createElement("button");
+//       var li = document.createElement("li");
+//       ChoiceBtn.textContent = i + 1 + " " + CurrentQuestion.choice[i];
+//       li.appendChild(ChoiceBtn);
+//       hcoices.firstElementChild.appendChild(li);
+//     }
+// }
+
+// function setTime() {}
+
+//ATTEMPT AT TIMER BAR
+//var timeEl = document.querySelector("#countdown");
+
+
+//dead end from internet
+var downloadTimer = setInterval(function(){
+  if(timeleft <= 0){
+    clearInterval(downloadTimer);
+    document.getElementById("countdown").innerHTML = "Finished";
+  } else {
+    document.getElementById("countdown").innerHTML = timeleft + " seconds remaining";
+  }
+  timeleft -= 1;
+}, 1000);
+
+
+    //ATTEMPT: if rightAnswer is true, add an event listener that fires off a the renderQuestion function again and adds to the score. Maybe do this the other way around and add an if-else statement right here?
+    if (rightAnswer === true) {
+      // can we add multiple results to an event listener?
+      addEventListener("click", renderQuestion, score++)
+      // addEventListener("click", score++) looks like you can't add multiple event listeners this way, it threw an error.
+    }
+
+
+//WALKTHROUGH FROM CLASS
+    document.querySelector("#answers")
+.addEventListener("click", function (e){
+  //this line prevents the function from going off when the div is clicked anywhere other than buttons
+  if (!e.target.matches("button")) return;
+  
+  //this gives each question a correctAnswer value for the click listener to match with below. Console log to confirm that correct value is being found.
+  correctAnswer = currentQuestion.correctAnswer;
+  console.log(correctAnswer);
+
+  //this should define the last clicked answer as the text of the button. the stringify operation is not working. This might not be necessary to current attempt.
+  var lastClickedAnswer = String(event.target);
+  console.log(lastClickedAnswer);
+  
+  // if-then statement to respond to right/wrong answers:
+  // if the text of the last clicked button matches the correct answer... this is where I'm stuck, how do I turn the content of the right answer's button into a string the function can recognize?
+  if (lastClickedAnswer.includes(correctAnswer)) {
+    // then increase the question index by one
+    questionIndex++;
+    // and fire the renderQuestion function again.
+    renderQuestion();
+    // otherwise,
+  } else {
+    // this should cancel the function if the answer is wrong, we'll also have to set it to subtract from the timer.
+    return
+  };
+});
+
+
+    
+// ATTEMPT: give each button a true/false value according to whether it matches the correct answer. It works inside the for loop but not outside (because there's no variable for "index").
+var rightAnswer = Boolean(currentQuestion.answers[i] === currentQuestion.correctAnswer);
+console.log(rightAnswer);
+
+//ATTEMPT: add an if-else statement to each button that renders the appropriate result to a correct/incorrect answer. this doesn't work as is and just subtracts 5 from the timer no matter what answer is chosen
+$btn.addEventListener("click", function() {if (rightAnswer === true) {score++, renderQuestion()} else {time = (time - 5)}});
+
+
+
+//here's an event listener meant to react to the above buttons being clicked, would go inside the for loop
+// document.querySelector(".btn").addEventListener("click", function(e){
+//   var $btn = e.target.textContent;
+//   if ($btn === questions[questionIndex].correctAnswer){
+//     console.log("Correct!"),
+//     renderQuestion
+//   } else {
+//     console.log("Wrong!"),
+//     timer - 5
+//   };
+// });
