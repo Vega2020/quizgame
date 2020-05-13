@@ -114,7 +114,8 @@ document.querySelector("#answers").addEventListener("click", function (e){
 
 document.querySelector("#highScoresLink").addEventListener("click", function() {
   clearInterval(timer);
-  document.querySelector("#timer").text("Game over");
+  var $timer = document.querySelector("#timer")
+  $timer.textContent = "game over";
   endGame();
 });
 
