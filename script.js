@@ -19,6 +19,16 @@ var questionPool = [
     question: "How does a for loop start?",
     answers: ["for (i = 0; i < 1; i++)", "4 (888) = 8", "if (function) repeat for (loop)", "for x = y, z"],
     correctAnswer: "for (i = 0; i < 1; i++)"
+  },
+  {
+    question: "What do you use a for loop for?",
+    answers: ["Nothing, really", "repeating a function for a given number of iterations", "Defining multiple variables at once", "Applying your style sheet to new elements"],
+    correctAnswer: "repeating a function for a given number of iterations"
+  },
+  {
+    question: "How do you ask the computer to check if something is equal to something else?",
+    answers: ["=", "equals", "===", "is ="],
+    correctAnswer: "==="
   }
 ]
 
@@ -28,9 +38,6 @@ var score = 0;
 var questionIndex = 0;
 //create a variable for the number of seconds we start with, and to be the number of seconds we have left
 var time = 60;
-//create a variable for our position in the question pool, this will cause it to move with the questionIndex variable
-var currentQuestion = questionPool[questionIndex];
-console.log(currentQuestion);
 
 
 // This line creates a $timer variable equal to the html element ID'd "timer". Putting a $ before elements in javascript when not using jquery still helps you "tag" that element within your javascript, a heplful trick. 
@@ -56,6 +63,8 @@ var timer = setInterval(function(){
 
 // this function will produce our questions and answers in their respective divs.
 function renderQuestion() {
+  //create a variable for our position in the question pool, this will cause it to move with the questionIndex variable
+  var currentQuestion = questionPool[questionIndex];
   //creates a $question variable that will attach to the #question element in the html
   var $question = document.querySelector("#question");
   //creates a $answers variable that will attach to the #answers element in html
@@ -70,49 +79,38 @@ function renderQuestion() {
     var $btn = document.createElement("button");
     $btn.textContent = currentQuestion.answers[i];
     $btn.setAttribute("class", "btn btn-dark ml-3");
+    $btn.setAttribute("style", "margin-top:16px; margin-right:16px; margin-bottom:16px");
     $answers.append($btn);
-
     
   }; //close for loop
 }; //close renderQuestion function
     
-// this tells the renderQuestion function to fire as soon as the page loads.
-renderQuestion();
-
-//CLASS WALKTHROUGH 2 - go back to an event listener separate from the for loop that's creating your buttons. you can use e.target.textContent to tell if your string matches the correct answer (probably without having to convert it to a boolean first).
 
 document.querySelector("#answers").addEventListener("click", function (e){
-    if (!e.target.matches("button")) return;
-    var userAnswer = e.target.textContent;
-
+  if (!e.target.matches("button")) return;
+  var userAnswer = e.target.textContent;
+  
   if (userAnswer === questionPool[questionIndex].correctAnswer) {
-    console.log("correct"),
-    score++,
-    document.querySelector("#scorebox").textContent = score,
-    console.log(score),
-    questionIndex++,
-    renderQuestion
+    score++;
+    document.querySelector("#scorebox").textContent = score;
   } else {
-    console.log("wrong");
+    time = time - 5;
   }
-
-  if (questionIndex === questionPool.length) {
+  
+  if (questionIndex >= questionPool.length) {
     //out of questions end game
     alert("game over")
   } else {
-    renderQuestion
+    questionIndex++;
+    renderQuestion();
   }
 });
-//END CLASS WALKTHROUGH 2
+
+
+// this tells the renderQuestion function to fire as soon as the page loads.
+renderQuestion();
 
 //PSEUDOCODE
-//make a button that starts the quiz and sets variables for the current question index, title of question, choices in question, the existence of a currentquestion variable
-
-//start the game with a score of zero by declaring a score variable and setting it to zero
-
-//set a variable for correct answers
-
-//if the user answers correctly, add one to the score with a function
 
 //take time away fif question is answered wrong:
 
