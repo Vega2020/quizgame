@@ -86,11 +86,16 @@ function renderQuestion() {
   }; //close for loop
 }; //close renderQuestion function
 
-//creates an endGame function that makes the questions and answers hidden
+//creates an endGame function that makes the questions and answers hidden and makes the high score display visible, this should probably also ask for the name input
 function endGame() {
   document.querySelector("#question").setAttribute("style", "visibility:hidden");
   document.querySelector("#answers").setAttribute("style", "visibility:hidden");
   document.querySelector("#highScoreDisplay").setAttribute("style", "visibility:visible; color:white");
+  initials = prompt("Enter your name");
+  currentScore = score;
+  userScoreEntry = initials + " : " + currentScore;
+  console.log(userScoreEntry);
+
 };
 
 
@@ -105,7 +110,7 @@ document.querySelector("#answers").addEventListener("click", function (e){
     time = time - 5;
   }
   
-  if (questionIndex >= questionPool.length) {
+  if (questionIndex === questionPool.length) {
     //out of questions end game
     alert("game over")
   } else {
@@ -113,6 +118,10 @@ document.querySelector("#answers").addEventListener("click", function (e){
     renderQuestion();
   }
 });
+
+if (questionIndex === questionPool.length) {
+  endGame();
+};
 
 document.querySelector("#highScoresLink").addEventListener("click", function() {
   clearInterval(timer);
