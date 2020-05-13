@@ -56,6 +56,7 @@ var timer = setInterval(function(){
   if (time <= 0){
     clearInterval(timer);
     endGame();
+    $timer.textContent = "game over"
   } 
   //the number after the closing brackets determines the number of milliseconds in the interval defined at the beginning of this function.
 }, 1000)
@@ -89,6 +90,7 @@ function renderQuestion() {
 function endGame() {
   document.querySelector("#question").setAttribute("style", "visibility:hidden");
   document.querySelector("#answers").setAttribute("style", "visibility:hidden");
+  document.querySelector("#highScoreDisplay").setAttribute("style", "visibility:visible; color:white");
 };
 
 
