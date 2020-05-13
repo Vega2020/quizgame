@@ -84,7 +84,13 @@ function renderQuestion() {
     
   }; //close for loop
 }; //close renderQuestion function
-    
+
+//creates an endGame function that makes the questions and answers hidden
+function endGame() {
+  document.querySelector("#question").setAttribute("style", "visibility:hidden");
+  document.querySelector("#answers").setAttribute("style", "visibility:hidden");
+};
+
 
 document.querySelector("#answers").addEventListener("click", function (e){
   if (!e.target.matches("button")) return;
@@ -104,6 +110,12 @@ document.querySelector("#answers").addEventListener("click", function (e){
     questionIndex++;
     renderQuestion();
   }
+});
+
+document.querySelector("#highScoresLink").addEventListener("click", function() {
+  clearInterval(timer);
+  document.querySelector("#timer").text("Game over");
+  endGame();
 });
 
 

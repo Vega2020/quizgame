@@ -14,7 +14,7 @@
     <!-- create a bar with the high score link and score counter -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="navbar">
-            <a class="navbar-brand" href="#">View High scores</a>
+            <a class="navbar-brand" id="highScoresLink">View High scores</a>
         </div>
         <div class="navbar">
             <div id="scorebox" style="color: white; font-family: 'Courier New', Courier, monospace;"></div>
@@ -28,7 +28,10 @@
     <container style="background-color: black;">
         <div id="question" style="margin-top: 30px; color: white; font-size: larger; font-family: 'Courier New', Courier, monospace; background-color: black; text-align: center;"></div>
         <div id="answers" class="center"  style="margin-top: 30px; background-color: black; font-family: 'Courier New', Courier, monospace"></div>
-        <div id="highScoreDisplay"></div>
+        <div id="highScoreDisplay" style="visibility: hidden;">
+            <h1>High scores:</h1>
+            <ul id="highScoreList"></ul>
+        </div>
     </container>
    
     <script src="script.js"></script>
