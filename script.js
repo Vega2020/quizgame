@@ -7,7 +7,7 @@ var questionPool = [
   },
   {
     question: "What does CSS stand for?",
-    answers: ["cranium skull smasher", "cereal swiss shark", "chubby single selfies", "cascading style sheets"],
+    answers: ["cranium skull smasher", "cereal swiss shark", "cherub surf selfies", "cascading style sheets"],
     correctAnswer: "cascading style sheets"
   },
   {
@@ -44,7 +44,7 @@ var time = 60;
 var $timer = document.querySelector("#timer");
 // Here's one for the scorebox.
 var $scorebox = document.querySelector("#scorebox");
-$scorebox.textContent = score;
+$scorebox.textContent = "Score : " + score;
 
 // create a timer variable and set an interval  
 var timer = setInterval(function(){
@@ -105,7 +105,7 @@ document.querySelector("#answers").addEventListener("click", function (e){
   
   if (userAnswer === questionPool[questionIndex].correctAnswer) {
     score++;
-    document.querySelector("#scorebox").textContent = score;
+    document.querySelector("#scorebox").textContent = "Score : " + score;
   } else {
     time = time - 5;
   }
